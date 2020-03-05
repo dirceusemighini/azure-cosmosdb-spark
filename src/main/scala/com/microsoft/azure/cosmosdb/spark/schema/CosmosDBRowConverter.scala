@@ -168,6 +168,8 @@ object CosmosDBRowConverter extends RowConverter[Document]
       case DoubleType           => element.asInstanceOf[Double]
       case IntegerType          => element.asInstanceOf[Int]
       case LongType             => element.asInstanceOf[Long]
+      case DecimalType()          => BigDecimal(element.toString)
+      //case DecimalType     => BigDecimal(element.toString)
       case StringType           => {
         if (isInternalRow) {
           new String(element.asInstanceOf[UTF8String].getBytes, "UTF-8")
